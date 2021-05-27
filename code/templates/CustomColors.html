@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+   <title>RPi Web Server</title>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" type ="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+   <link rel="stylesheet" type ="text/css" href="{{ url_for('static', filename='css/range.css') }}">
+   <!-- Optional theme -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<h1> Custom Color </h1>
+
+<br>
+
+<div class="middle">
+        
+<form method="POST" action="/">
+<input class="range" type="range" name="red" min="100" max="355"</input><br><br>
+<input class="range" type="range" name="green" min="100" max="355"</input><br><br>
+<input class="range" type="range" name="blue"  min="100" max="355"</input><br><br>
+<input type="submit" value="submit" class="submit">
+</form>
+
+</div>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+   <title>RPi Web Server</title>
+   <link rel="stylesheet" type ="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+   <!-- Optional theme -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- Latest compiled and minified CSS -->
+</head>
+
+<body>
+
+<h1>Preset Colors</h1>
+
+
+{% for color in states %} 
+<br><br><br>
+<div class="middle">
+      <a href="{{loop.index}}" class="btn">{{color}}</a>
+</div>
+
+{% endfor %}
+
+</body>
+</html>
+
