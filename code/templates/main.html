@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+   <title>RPi Web Server</title>
+   <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" type ="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" type ="text/css" href="{{ url_for('static', filename='css/checkboxes.css') }}">
+   <!-- Optional theme -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+<h1>Light controller</h1>
+
+
+<form method="POST" action="/">
+
+<div class="middle">
+      <input type="submit" name ="PresetColors" value = "Preset colors" class="submit">
+      <input type="submit" name ="CustomColors" value = "Custom colors" class="submit">
+      <input type="submit" name ="LEDOff" value = "LED Off" class="submit">
+      {% if alarmstate == 0 %}
+      <input type="submit" name ="alarm" value = "turn alarm on" class="submit">
+      {% else %}
+      <input type="submit" name ="alarm" value = "turn alarm off" class="submit">
+      {% endif %}
+
+</div>
+
+
+<div class="lower-middle">
+{% for key, value in roomschecked.items() %}
+
+<input type="checkbox" id="{{key}}" name="rooms" value={{key}} {%if value == True %} checked {%endif%}> <label for="{{key}}">{{key}}</label>
+
+{% endfor %}
+
+</div>
+
+<input type="hidden" name = "rooms" value = "placeholder">
+
+
+<input type="time" name="alarmtime" min="00:00" max="23:59" value={{alarmtime[0]}} class="time">
+
+
+</form>
+
+</body>
+</html>
+
