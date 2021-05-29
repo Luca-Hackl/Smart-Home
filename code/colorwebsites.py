@@ -1,3 +1,5 @@
+from __main__ import socketio
+
 from flask import Blueprint, render_template, session,abort
 
 from flask import Flask, render_template, request, url_for, redirect
@@ -59,7 +61,7 @@ def main():
 
            mqttc.publish('esp8266/CustomColor', all_numbers)
 
-           return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked, alarmtime = alarmtime,  states = getStates())
+           return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked, alarmtime = alarmtime, async_mode=socketio.async_mode, states = getStates())
 
        elif 'PresetColors' in request.form:
            return PresetColors()
@@ -77,7 +79,7 @@ def main():
 
 
     else:
-        return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked,alarmtime = alarmtime, states = getStates())
+        return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked,alarmtime = alarmtime,async_mode=socketio.async_mode, states = getStates())
 
 def getStates():
     states =  ["sunset", "relax", "evening", "pink", "pulse"] #all preset colors
@@ -127,7 +129,7 @@ def action(action):
       mqttc.publish("esp8266/all","0") #make sure to turn all LED's off
 
    global buttonchange
-   return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked, alarmtime = alarmtime, states = getStates())
+   return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked, alarmtime = alarmtime,async_mode=socketio.async_mode, states = getStates())
 
 
 
@@ -146,4 +148,4 @@ def alarm():
         mqttc.publish("esp8266/all", "alarm0")
         startthread(True, alarmtime)
 
-    return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked, alarmtime = alarmtime, states = getStates())
+    return render_template('main.html', alarmstate=buttonchange, roomschecked=roomschecked, alarmtime = alarmtime,async_mode=socketio.async_mode, states = getStates())

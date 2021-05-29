@@ -1,7 +1,15 @@
-from dotenv import load_dotenv
-import os
+import eventlet
+eventlet.monkey_patch()
 
 from flask import Flask, render_template, request, url_for, redirect
+from flask_socketio import SocketIO, emit, join_room, leave_room
+
+app = Flask(__name__)
+
+socketio = SocketIO(app)
+
+from dotenv import load_dotenv
+import os
 
 from models import UserModel,db,login
 import time
@@ -12,8 +20,6 @@ from login import security as login_blueprint
 from login import login_manager
 
 from mqtt import mqttc
-
-app = Flask(__name__)
 
 load_dotenv()
 app.secret_key = os.getenv('secret_key')
@@ -34,4 +40,4 @@ def create_all():
 
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=8181, ssl_context=('cert.pem', 'key.pem'))
+   socketio.run(app, host='0.0.0.0', port=8181, debug=True, keyfile='key.pem', certfile='cert.pem')

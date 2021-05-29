@@ -5,7 +5,6 @@ code/__pycache__
 .env
 cert.pem
 key.pem
-models.py
 models.pyc
 nohup.out
 __pycache__

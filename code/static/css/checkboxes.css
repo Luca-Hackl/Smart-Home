@@ -59,3 +59,9 @@ input[type="checkbox"]:checked + label:before {
   transform: translateX(-50%);
   top: 50%
 }
+
+.lower-left{
+  position: absolute;
+  left: 20%;
+  top: 80%
+}
